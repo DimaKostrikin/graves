@@ -7,11 +7,11 @@ FROM node:lts as builder
 WORKDIR /graves
 COPY . .
 COPY --from=dependencies /graves/node_modules ./node_modules
-#RUN yarn build
+RUN yarn build
 
 FROM node:lts as runner
 WORKDIR /graves
-#ENV NODE_ENV production
+ENV NODE_ENV production
 
 COPY --from=builder /graves/public ./public
 COPY --from=builder /graves/package.json ./package.json
@@ -24,4 +24,4 @@ COPY --from=builder /graves/pages ./pages
 COPY --from=builder /graves/styles ./styles
 
 EXPOSE 3000
-CMD ["yarn", "dev"]
+CMD ["yarn", "start"]
