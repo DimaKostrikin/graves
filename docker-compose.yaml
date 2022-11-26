@@ -2,6 +2,10 @@ version: "3"
 services:
   backend:
     build: ../../backend/undertaker/
+    command: go run main.go
+    image: undertaker
+    ports:
+      - "1323:1323"
   nginx:
     build: ./nginx
     ports:
