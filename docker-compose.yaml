@@ -8,3 +8,5 @@ services:
       - 80:80
   nextjs:
     build: ./
+    ports:
+      - 3000:3000
