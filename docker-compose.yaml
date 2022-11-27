@@ -4,13 +4,9 @@ services:
     build: ../../backend/undertaker/
     command: go run main.go
     image: undertaker
-    ports:
-      - "1323:1323"
   nginx:
     build: ./nginx
     ports:
       - 80:80
   nextjs:
     build: ./
-    ports:
-      - 3000:3000
