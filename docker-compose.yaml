@@ -9,7 +9,7 @@ services:
   nextjs:
     build: ./
     networks:
-      - undertaker_frontend
+      - frontend
 
 networks:
   frontend:
