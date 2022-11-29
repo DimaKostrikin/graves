@@ -1,12 +1,16 @@
 version: "3"
 services:
-  backend:
-    build: ../../backend/undertaker/
-    command: go run main.go
-    image: undertaker
   nginx:
     build: ./nginx
     ports:
       - 80:80
+    networks:
+      - undertaker_frontend
   nextjs:
     build: ./
+    networks:
+      - undertaker_frontend
+
+networks:
+  frontend:
+    name: undertaker_frontend
