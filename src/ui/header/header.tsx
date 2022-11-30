@@ -7,10 +7,12 @@ const HeaderContainer = styled.div`
   height: 160px;
 `;
 
-export const Header = () => {
+const Header = () => {
   return (
     <HeaderContainer>
       <MainContainer></MainContainer>
     </HeaderContainer>
   );
 };
+
+export default Header;

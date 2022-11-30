@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { palette } from "../palette";
-import { Header } from "../ui/header/header";
+import Header from "../ui/header/header";
 
 const PageContainer = styled.div`
   background-color: ${palette.white};
