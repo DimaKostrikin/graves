@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { palette } from "../../palette";
 import { MainContainer } from "../main-container/main-container";
-import { TextMinor } from "../styled-text";
+import { TextMinorInvert } from "../styled-text";
+import { ActionButtonGroup } from "./action-button-group";
+import { Catalog } from "./catalog";
 import { GeoTag } from "./geo-tag";
 
 const HeaderContainer = styled.div`
@@ -14,7 +16,12 @@ const HeaderTopContainer = styled.div`
   justify-content: space-between;
 `;
 
-const HeaderMiddleContainer = styled.div``;
+const HeaderMiddleContainer = styled.div`
+  margin-block-start: 16px;
+  display: grid;
+  grid-template-columns: min-content auto min-content;
+  column-gap: 16px;
+`;
 
 const HeaderBottomContainer = styled.div``;
 
@@ -29,11 +36,15 @@ const Header = () => {
         <HeaderTopContainer>
           <GeoTag areaName="Москва и МО" />
           <div>
-            <TextMinor>О нас </TextMinor>
-            <TextMinor>Контакты</TextMinor>
+            <TextMinorInvert>О нас </TextMinorInvert>
+            <TextMinorInvert>Контакты</TextMinorInvert>
           </div>
         </HeaderTopContainer>
-        <HeaderMiddleContainer></HeaderMiddleContainer>
+        <HeaderMiddleContainer>
+          <Catalog />
+          <input />
+          <ActionButtonGroup />
+        </HeaderMiddleContainer>
         <HeaderBottomContainer></HeaderBottomContainer>
       </MainContainer>
     </HeaderContainer>

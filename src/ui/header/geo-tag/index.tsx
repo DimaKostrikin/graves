@@ -1,7 +1,8 @@
+import { icons } from "@/ui";
 import styled from "styled-components";
 import { palette } from "../../../palette";
-import { Geolocation } from "../../icons";
-import { TextMinor } from "../../styled-text";
+
+import { TextMinorInvert } from "../../styled-text";
 
 const GeoTagContainer = styled.div`
   display: flex;
@@ -12,8 +13,8 @@ const GeoTagContainer = styled.div`
 export const GeoTag = ({ areaName }: { areaName: string }) => {
   return (
     <GeoTagContainer>
-      <Geolocation color={palette.blueActive} />
-      <TextMinor>{areaName}</TextMinor>
+      <icons.Geolocation color={palette.blueActive} />
+      <TextMinorInvert>{areaName}</TextMinorInvert>
     </GeoTagContainer>
   );
 };
