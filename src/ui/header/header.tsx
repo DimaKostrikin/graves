@@ -28,6 +28,7 @@ const HeaderBottomContainer = styled.div``;
 //TODO: Сделать компонент ссылки.
 // Сделать компонент инпута
 // Сделать компонент диалога
+// Подцепить шрифт
 
 const Header = () => {
   return (
