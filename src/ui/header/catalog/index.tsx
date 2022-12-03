@@ -1,6 +1,6 @@
 import { palette } from "@/palette";
 import { icons } from "@/ui";
-import { TextRegularInvert } from "@/ui/styled-text";
+import { TextRegularHeaderInvert } from "@/ui/styled-text";
 import styled from "styled-components";
 
 const CatalogContainer = styled.div`
@@ -14,7 +14,7 @@ export const Catalog = () => {
   return (
     <CatalogContainer>
       <icons.Catalog color={palette.white} />
-      <TextRegularInvert>Каталог</TextRegularInvert>
+      <TextRegularHeaderInvert>Каталог</TextRegularHeaderInvert>
     </CatalogContainer>
   );
 };
