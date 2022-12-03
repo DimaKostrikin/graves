@@ -1,7 +1,8 @@
+import Link from "next/link";
+import { useHover } from "react-aria";
 import styled from "styled-components";
 import { palette } from "../../palette";
 import { MainContainer } from "../main-container/main-container";
-import { TextMinorInvert } from "../styled-text";
 import { ActionButtonGroup } from "./action-button-group";
 import { Catalog } from "./catalog";
 import { GeoTag } from "./geo-tag";
@@ -30,16 +31,48 @@ const HeaderBottomContainer = styled.div``;
 // Сделать компонент диалога
 // Подцепить шрифт
 
+const InfoLinksContainer = styled.div`
+  display: grid;
+  grid-template-columns: min-content min-content;
+  column-gap: 16px;
+  align-items: center;
+  white-space: nowrap;
+`;
+
+const TextInfoLink = styled.span<{ hover?: boolean }>`
+  font-family: GillSansC;
+  color: ${(props) => (props.hover ? palette.blueActive : palette.white)};
+  font-size: 14px;
+`;
+
+const InfoLink = ({ href, text }: { href: string; text: string }) => {
+  const { hoverProps, isHovered } = useHover({});
+
+  return (
+    <Link href={href}>
+      <TextInfoLink {...hoverProps} hover={isHovered}>
+        {text}
+      </TextInfoLink>
+    </Link>
+  );
+};
+
+const InfoLinks = () => {
+  return (
+    <InfoLinksContainer>
+      <InfoLink href="about" text="О нас" />
+      <InfoLink href="contacts" text="Контакты" />
+    </InfoLinksContainer>
+  );
+};
+
 const Header = () => {
   return (
     <HeaderContainer>
       <MainContainer>
         <HeaderTopContainer>
           <GeoTag areaName="Москва и МО" />
-          <div>
-            <TextMinorInvert>О нас </TextMinorInvert>
-            <TextMinorInvert>Контакты</TextMinorInvert>
-          </div>
+          <InfoLinks />
         </HeaderTopContainer>
         <HeaderMiddleContainer>
           <Catalog />
