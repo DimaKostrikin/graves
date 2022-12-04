@@ -1,7 +1,12 @@
 import { palette } from "@/palette";
 import { icons } from "@/ui";
-import { useRef } from "react";
-import { AriaTextFieldOptions, useTextField } from "react-aria";
+import { useRef, useState } from "react";
+import {
+  AriaTextFieldOptions,
+  mergeProps,
+  useFocus,
+  useTextField,
+} from "react-aria";
 import styled from "styled-components";
 
 const SearchInputContainer = styled.div`
@@ -18,6 +23,15 @@ const SearchInputInput = styled.input`
   font-size: 20px;
   background-color: ${palette.darkWhite};
   outline-style: none;
+  ::placeholder,
+  ::-webkit-input-placeholder {
+    color: ${palette.white};
+    opacity: 0.6;
+  }
+  :-ms-input-placeholder {
+    color: ${palette.white};
+    opacity: 0.6;
+  }
 `;
 const SearchIconContainer = styled.div`
   position: absolute;
@@ -26,16 +40,27 @@ const SearchIconContainer = styled.div`
 `;
 
 export const SearchInput = (props: AriaTextFieldOptions<"input">) => {
-  let ref = useRef<HTMLInputElement>(null);
-  let { labelProps, inputProps, descriptionProps, errorMessageProps } =
-    useTextField(props, ref);
+  const ref = useRef<HTMLInputElement>(null);
+  const { inputProps } = useTextField(props, ref);
+  const [placeholder, setPlaceholder] = useState("Введите поисковый запрос");
+  const { focusProps } = useFocus({
+    onFocus: () => {
+      setPlaceholder("");
+    },
+    onBlur: () => {
+      setPlaceholder("Введите поисковый запрос");
+    },
+  });
 
   return (
     <SearchInputContainer>
       <SearchIconContainer>
         <icons.Search color={palette.white} />
       </SearchIconContainer>
-      <SearchInputInput {...inputProps} ref={ref} />
+      <SearchInputInput
+        {...mergeProps(inputProps, focusProps)}
+        placeholder={placeholder}
+      />
     </SearchInputContainer>
   );
 };

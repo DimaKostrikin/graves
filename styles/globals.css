@@ -4,6 +4,11 @@ body {
   margin: 0;
 }
 
+/* TODO: убрать */
+html {
+  height: 3000px;
+}
+
 a {
   color: inherit;
   text-decoration: none;
