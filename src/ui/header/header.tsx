@@ -5,6 +5,7 @@ import { ActionButtonGroup } from "./action-button-group";
 import { Catalog } from "./catalog";
 import { GeoTag } from "./geo-tag";
 import { InfoLinks } from "./info-links";
+import { SearchInput } from "./search-input/search-input";
 
 const HeaderContainer = styled.div`
   background-color: ${palette.darkGrey};
@@ -40,7 +41,7 @@ const Header = () => {
         </HeaderTopContainer>
         <HeaderMiddleContainer>
           <Catalog />
-          <input />
+          <SearchInput />
           <ActionButtonGroup />
         </HeaderMiddleContainer>
         <HeaderBottomContainer></HeaderBottomContainer>
