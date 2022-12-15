@@ -1,7 +1,7 @@
 import { palette } from "@/palette";
 import { TextRegularHeaderInvert } from "@/ui/styled-text";
 import { ReactNode } from "react";
-import { useHover } from "react-aria";
+import { mergeProps, useHover, usePress } from "react-aria";
 import styled from "styled-components";
 
 const ActionButtonContainer = styled.button<{ hover?: boolean }>`
@@ -21,14 +21,20 @@ const ActionButtonContainer = styled.button<{ hover?: boolean }>`
 export const ActionButton = ({
   icon,
   text,
+  onPress,
 }: {
   icon: ReactNode;
   text: string;
+  onPress?: () => void;
 }) => {
   const { hoverProps, isHovered } = useHover({});
+  const { pressProps } = usePress({ onPress });
 
   return (
-    <ActionButtonContainer {...hoverProps} hover={isHovered}>
+    <ActionButtonContainer
+      {...mergeProps(hoverProps, pressProps)}
+      hover={isHovered}
+    >
       {icon}
       <TextRegularHeaderInvert hover={isHovered}>
         {text}

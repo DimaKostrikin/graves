@@ -1,4 +1,3 @@
-import { ScrollEvent } from "@react-types/shared";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { palette } from "../../palette";
@@ -41,15 +40,13 @@ const HeaderBottomContainer = styled.div<{ hidden?: boolean }>`
   transition: all 0.1s;
 `;
 
-//TODO: Сделать компонент ссылки.
-// Сделать компонент инпута
+//TODO:
 // Сделать компонент диалога
 // Подцепить шрифт
 
 //TODO: add debounce
 // Убрать разворачивание при скролле наверх
 const Header = () => {
-  console.log("render");
   const [scroll, setScroll] = useState<"up" | "down">("up");
   useEffect(() => {
     let scrollTop = window.scrollY;

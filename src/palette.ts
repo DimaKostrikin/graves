@@ -3,4 +3,5 @@ export const palette = {
   white: "#EEEEEE",
   blueActive: "#2860B4",
   darkWhite: "#717171",
+  darkTransparent: "rgba(0, 0, 0, 0.5)",
 };
