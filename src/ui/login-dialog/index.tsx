@@ -48,15 +48,6 @@ export const LoginDialog = ({ onClose }: { onClose: () => void }) => {
 
   return (
     <Dialog
-      children={
-        <DialogContent
-          stage={stage}
-          phoneNumber={phoneNumber}
-          code={code}
-          onCodeChange={setCode}
-          onPhoneNumberChange={setPhoneNumber}
-        />
-      }
       title="Вход"
       onClose={onClose}
       onApply={() => {
@@ -64,6 +55,14 @@ export const LoginDialog = ({ onClose }: { onClose: () => void }) => {
         if (stage === "code") onClose();
       }}
       onApplyButtonText="Продолжить"
-    />
+    >
+      <DialogContent
+        stage={stage}
+        phoneNumber={phoneNumber}
+        code={code}
+        onCodeChange={setCode}
+        onPhoneNumberChange={setPhoneNumber}
+      />
+    </Dialog>
   );
 };

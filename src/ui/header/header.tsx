@@ -41,7 +41,6 @@ const HeaderBottomContainer = styled.div<{ hidden?: boolean }>`
 `;
 
 //TODO:
-// Сделать компонент диалога
 // Подцепить шрифт
 
 //TODO: add debounce
