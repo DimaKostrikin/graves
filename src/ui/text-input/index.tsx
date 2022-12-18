@@ -1,7 +1,6 @@
 import { palette } from "@/palette";
 import { useRef } from "react";
 import { useTextField } from "react-aria";
-import InputMask from "react-input-mask";
 import styled from "styled-components";
 
 const TextInputLabel = styled.label`
@@ -51,6 +50,7 @@ export const TextInput = ({
   onChange: (text: string) => void;
 }) => {
   const ref = useRef<HTMLInputElement>(null);
+
   const { labelProps, inputProps, descriptionProps, errorMessageProps } =
     useTextField(
       { value, isDisabled: disabled, placeholder, onChange, type },
