@@ -9,7 +9,7 @@ export const Geolocation = (props: SVGProps<SVGSVGElement>) => {
       height="24"
       fill="none"
     >
-      <g clip-path="url(#a)">
+      <g clipPath="url(#a)">
         <path
           fill="currentColor"
           d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5Z"
@@ -78,7 +78,7 @@ export const ShoppingBag = (props: SVGProps<SVGSVGElement>) => {
       height="24"
       fill="none"
     >
-      <g clip-path="url(#a)">
+      <g clipPath="url(#a)">
         <path
           fill="currentColor"
           d="M18 6h-2c0-2.21-1.79-4-4-4S8 3.79 8 6H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2Zm-8 4c0 .55-.45 1-1 1s-1-.45-1-1V8h2v2Zm2-6c1.1 0 2 .9 2 2h-4c0-1.1.9-2 2-2Zm4 6c0 .55-.45 1-1 1s-1-.45-1-1V8h2v2Z"
@@ -102,7 +102,7 @@ export const Person = (props: SVGProps<SVGSVGElement>) => {
       height="24"
       fill="none"
     >
-      <g clip-path="url(#a)">
+      <g clipPath="url(#a)">
         <path
           fill="currentColor"
           d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4Zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4Z"
@@ -126,7 +126,7 @@ export const Search = (props: SVGProps<SVGSVGElement>) => {
       height="24"
       fill="none"
     >
-      <g clip-path="url(#a)">
+      <g clipPath="url(#a)">
         <path
           fill="currentColor"
           d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5Zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14Z"
@@ -137,6 +137,25 @@ export const Search = (props: SVGProps<SVGSVGElement>) => {
           <rect width="24" height="24" fill="currentColor" rx="12" />
         </clipPath>
       </defs>
+    </svg>
+  );
+};
+
+export const Cross = (props: SVGProps<SVGSVGElement>) => {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+    >
+      <path
+        fill="currentColor"
+        fillRule="evenodd"
+        d="M13.92 12.056 21 19.092 19.08 21 12 13.964 4.92 21 3 19.092l7.08-7.036-.056-.056.056-.056L3 4.908 4.92 3 12 10.036 19.08 3 21 4.908l-7.08 7.036.056.056-.056.056Z"
+        clipRule="evenodd"
+      />
     </svg>
   );
 };

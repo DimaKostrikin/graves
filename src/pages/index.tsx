@@ -10,11 +10,6 @@ const PageContainer = styled.div`
 const Home = () => {
   return (
     <PageContainer>
-      <Dialog
-        children={<div>Registration epta</div>}
-        title="Registration"
-        onClose={() => console.log(1)}
-      />
       <Header />
     </PageContainer>
   );

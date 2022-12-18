@@ -1,5 +1,6 @@
 import { icons } from "@/ui";
 import { Dialog } from "@/ui/dialog";
+import { LoginDialog } from "@/ui/login-dialog";
 import { useOverlayTriggerState } from "react-stately";
 import styled from "styled-components";
 import { ActionButton } from "./action-button";
@@ -18,6 +19,7 @@ export const ActionButtonGroup = () => {
       <ActionButton text="Корзина" icon={<icons.Cart />} />
       <ActionButton text="Мои заказы" icon={<icons.ShoppingBag />} />
       <ActionButton text="Войти" onPress={state.open} icon={<icons.Person />} />
+      {state.isOpen && <LoginDialog onClose={state.close} />}
     </ActionButtonGroupContainer>
   );
 };

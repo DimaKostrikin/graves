@@ -14,7 +14,7 @@ const SearchInputContainer = styled.div`
   position: relative;
 `;
 const SearchInputInput = styled.input`
-  border-radius: 500px;
+  border-radius: 8px;
   border: 0;
   padding: 0 48px;
   margin: 0;
@@ -44,9 +44,10 @@ export const SearchInput = (props: AriaTextFieldOptions<"input">) => {
   const { inputProps } = useTextField(props, ref);
   const [placeholder, setPlaceholder] = useState("Введите поисковый запрос");
   const { focusProps } = useFocus({
-    onFocus: () => {
-      setPlaceholder("");
-    },
+    // Нигде не скрывается плэйсхолдер по фокусу чзх.
+    // onFocus: () => {
+    //   setPlaceholder("");
+    // },
     onBlur: () => {
       setPlaceholder("Введите поисковый запрос");
     },
