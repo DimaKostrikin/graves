@@ -1,6 +1,7 @@
 import { palette } from "@/palette";
 import { useRef } from "react";
 import { useTextField } from "react-aria";
+import InputMask from "react-input-mask";
 import styled from "styled-components";
 
 const TextInputLabel = styled.label`
@@ -38,6 +39,7 @@ export const TextInput = ({
   disabled,
   errorMessage,
   placeholder,
+  type = "text",
   onChange,
 }: {
   label?: string;
@@ -45,11 +47,15 @@ export const TextInput = ({
   disabled?: boolean;
   placeholder?: string;
   errorMessage?: string;
+  type?: "text" | "tel";
   onChange: (text: string) => void;
 }) => {
   const ref = useRef<HTMLInputElement>(null);
   const { labelProps, inputProps, descriptionProps, errorMessageProps } =
-    useTextField({ value, isDisabled: disabled, placeholder, onChange }, ref);
+    useTextField(
+      { value, isDisabled: disabled, placeholder, onChange, type },
+      ref
+    );
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
