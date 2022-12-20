@@ -47,14 +47,15 @@ export const LoginDialog = ({ onClose }: { onClose: () => void }) => {
   const [code, setCode] = useState("");
 
   const getPhoneMask = (text: string) => {
-    const numbers =
-      text.replace(/\D/g, "").match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,4})/) ||
-      [];
     let maskedPhoneNumber = "";
 
     if (text.length === 1 && text[0] === "+") {
       maskedPhoneNumber = "+";
     }
+
+    const numbers =
+      text.replace(/\D/g, "").match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,4})/) ||
+      [];
 
     if (numbers[1] === "7" || numbers[1] === "8") {
       maskedPhoneNumber = "+7";
