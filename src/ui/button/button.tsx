@@ -9,6 +9,7 @@ const transparentPressed = "rgba(0, 0, 0, 0.4)";
 const ButtonContainer = styled.button<{
   isHovered?: boolean;
   isPressed?: boolean;
+  isDisabled?: boolean;
   view: "normal" | "ghost";
 }>`
   position: relative;
@@ -20,6 +21,9 @@ const ButtonContainer = styled.button<{
   padding: 0;
   height: 48px;
   background-color: ${(props) => {
+    if (props.isDisabled) {
+      return palette.darkWhite;
+    }
     if (props.view === "normal") {
       if (props.isPressed) return palette.blueActivePressed;
       if (props.isHovered) return palette.blueActiveHovered;
@@ -70,6 +74,7 @@ export const Button = ({
       {...mergeProps(buttonProps, hoverProps)}
       isHovered={isHovered}
       isPressed={isPressed}
+      isDisabled={disabled}
       view={view}
     >
       {text && <span>{text}</span>}

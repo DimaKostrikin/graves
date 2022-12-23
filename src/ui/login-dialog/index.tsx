@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { Dialog } from "../dialog";
-import { TextInput } from "../text-input";
+import { PhoneInput, TextInput } from "../text-input";
 
 const DialogContentContainer = styled.div`
   padding: 24px 0;
@@ -23,7 +23,7 @@ const DialogContent = ({
   return (
     <DialogContentContainer>
       {stage === "phone" ? (
-        <TextInput
+        <PhoneInput
           value={phoneNumber}
           label="Номер телефона"
           placeholder="+7-228-148-822"
@@ -46,39 +46,6 @@ export const LoginDialog = ({ onClose }: { onClose: () => void }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [code, setCode] = useState("");
 
-  const getPhoneMask = (text: string) => {
-    let maskedPhoneNumber = "";
-
-    if (text.length === 1 && text[0] === "+") {
-      maskedPhoneNumber = "+";
-    }
-
-    const numbers =
-      text.replace(/\D/g, "").match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,4})/) ||
-      [];
-
-    if (numbers[1] === "7" || numbers[1] === "8") {
-      maskedPhoneNumber = "+7";
-    }
-
-    if (numbers[1] === "9") {
-      const nineCaseNumber =
-        text.replace(/\D/g, "").match(/(\d{0,3})(\d{0,3})(\d{0,4})/) || [];
-      maskedPhoneNumber = "+7 (";
-      maskedPhoneNumber += nineCaseNumber[1];
-      if (nineCaseNumber[2][0]) maskedPhoneNumber += `) ${nineCaseNumber[2]}`;
-      if (nineCaseNumber[3][0]) maskedPhoneNumber += `-${nineCaseNumber[3]}`;
-      setPhoneNumber(maskedPhoneNumber);
-      return;
-    }
-
-    if (numbers[2][0]) maskedPhoneNumber += ` (${numbers[2]}`;
-    if (numbers[3][0]) maskedPhoneNumber += `) ${numbers[3]}`;
-    if (numbers[4][0]) maskedPhoneNumber += `-${numbers[4]}`;
-
-    setPhoneNumber(maskedPhoneNumber);
-  };
-
   return (
     <Dialog
       title="Вход"
@@ -87,6 +54,13 @@ export const LoginDialog = ({ onClose }: { onClose: () => void }) => {
         if (stage === "phone") setStage("code");
         if (stage === "code") onClose();
       }}
+      isApplyDisabled={
+        stage === "phone"
+          ? phoneNumber.length === 0 ||
+            (phoneNumber.startsWith("+7 (") &&
+              phoneNumber.replace(/\D/g, "").length !== 11)
+          : code.length !== 4
+      }
       onApplyButtonText="Продолжить"
     >
       <DialogContent
@@ -94,7 +68,7 @@ export const LoginDialog = ({ onClose }: { onClose: () => void }) => {
         phoneNumber={phoneNumber}
         code={code}
         onCodeChange={setCode}
-        onPhoneNumberChange={getPhoneMask}
+        onPhoneNumberChange={setPhoneNumber}
       />
     </Dialog>
   );

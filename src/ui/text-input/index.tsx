@@ -38,7 +38,6 @@ export const TextInput = ({
   disabled,
   errorMessage,
   placeholder,
-  type = "text",
   onChange,
 }: {
   label?: string;
@@ -46,14 +45,51 @@ export const TextInput = ({
   disabled?: boolean;
   placeholder?: string;
   errorMessage?: string;
-  type?: "text" | "tel";
   onChange: (text: string) => void;
 }) => {
   const ref = useRef<HTMLInputElement>(null);
 
   const { labelProps, inputProps, descriptionProps, errorMessageProps } =
+    useTextField({ value, isDisabled: disabled, placeholder, onChange }, ref);
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      {label && <TextInputLabel {...labelProps}>{label}</TextInputLabel>}
+      <TextInputInput
+        ref={ref}
+        {...inputProps}
+        isError={Boolean(errorMessage)}
+      />
+      {errorMessage && (
+        <TextInputErrorMessage {...errorMessageProps}>
+          {errorMessage}
+        </TextInputErrorMessage>
+      )}
+    </div>
+  );
+};
+
+export const PhoneInput = ({
+  label,
+  value,
+  disabled,
+  errorMessage,
+  placeholder,
+  onChange,
+}: {
+  label?: string;
+  value: string;
+  disabled?: boolean;
+  placeholder?: string;
+  errorMessage?: string;
+  onChange: (plainText: string) => void;
+}) => {
+  const ref = useRef<HTMLInputElement>(null);
+  const modeRef = useRef<"russia" | "international">("russia");
+
+  const { labelProps, inputProps, descriptionProps, errorMessageProps } =
     useTextField(
-      { value, isDisabled: disabled, placeholder, onChange, type },
+      { value, isDisabled: disabled, placeholder, name: "phone" },
       ref
     );
 
@@ -61,9 +97,70 @@ export const TextInput = ({
     <div style={{ display: "flex", flexDirection: "column" }}>
       {label && <TextInputLabel {...labelProps}>{label}</TextInputLabel>}
       <TextInputInput
-        isError={Boolean(errorMessage)}
-        {...inputProps}
         ref={ref}
+        {...inputProps}
+        isError={Boolean(errorMessage)}
+        onChange={(e) => {
+          let maskedPhoneNumber = "";
+          const value = e.currentTarget.value;
+          const plainNumbers = value.replace(/\D/g, "");
+
+          if (value === "") {
+            onChange("");
+            return;
+          }
+
+          if (e.currentTarget.selectionStart !== value.length) {
+            onChange(value);
+            return;
+          }
+
+          if (
+            plainNumbers === "7" ||
+            plainNumbers === "8" ||
+            plainNumbers === "9"
+          ) {
+            modeRef.current = "russia";
+          } else if (plainNumbers.length === 1) {
+            modeRef.current = "international";
+          }
+
+          if (value === "+") {
+            modeRef.current = "international";
+          }
+
+          if (modeRef.current === "russia") {
+            maskedPhoneNumber = "+7 (";
+
+            if (plainNumbers === "9") {
+              maskedPhoneNumber = "+7 (9";
+            }
+
+            maskedPhoneNumber += plainNumbers.substring(1, 4);
+
+            if (plainNumbers.length >= 5) {
+              maskedPhoneNumber += ") ";
+              maskedPhoneNumber += plainNumbers.substring(4, 7);
+            }
+
+            if (plainNumbers.length >= 8) {
+              maskedPhoneNumber += "-";
+              maskedPhoneNumber += plainNumbers.substring(7, 9);
+            }
+
+            if (plainNumbers.length >= 10) {
+              maskedPhoneNumber += "-";
+              maskedPhoneNumber += plainNumbers.substring(9, 11);
+            }
+          }
+
+          if (modeRef.current === "international") {
+            maskedPhoneNumber = "+";
+            maskedPhoneNumber += plainNumbers;
+          }
+
+          onChange(maskedPhoneNumber);
+        }}
       />
       {errorMessage && (
         <TextInputErrorMessage {...errorMessageProps}>

@@ -43,12 +43,14 @@ export const Dialog = ({
   title,
   children,
   onApplyButtonText,
+  isApplyDisabled,
   onClose,
   onApply,
 }: {
   title: string;
   children: ReactNode;
   onApplyButtonText?: string;
+  isApplyDisabled?: boolean;
   onClose: () => void;
   onApply?: () => void;
 }) => {
@@ -72,7 +74,11 @@ export const Dialog = ({
         {children}
         {onApply && (
           <div style={{ display: "grid" }}>
-            <Button text={onApplyButtonText} onPress={onApply} />
+            <Button
+              text={onApplyButtonText}
+              onPress={onApply}
+              disabled={isApplyDisabled}
+            />
           </div>
         )}
       </DialogOverlay>
