@@ -2,11 +2,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-}
-
-/* TODO: убрать */
-html {
-  height: 3000px;
+  background-color: #eeeeee;
 }
 
 a {
