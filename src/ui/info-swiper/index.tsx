@@ -1,7 +1,7 @@
 import { palette } from "@/palette";
-import Image from "next/image";
 import styled from "styled-components";
-import image1 from "../../../public/image.jpg";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 const useData = () => {
   return {
@@ -62,9 +62,17 @@ const InfoSwiperText = styled.span`
 export const InfoSwiper = () => {
   const { items } = useData();
   return (
-    <InfoSwiperContainer imageSrc="https://geoplatforma.ru/wv/0001/1103.jpg">
-      <InfoSwiperTitle>{items[0].title}</InfoSwiperTitle>
-      <InfoSwiperText>{items[0].text}</InfoSwiperText>
-    </InfoSwiperContainer>
+    <Swiper spaceBetween={30}>
+      {items.map(({ title, text, imageSrc }) => {
+        return (
+          <SwiperSlide>
+            <InfoSwiperContainer imageSrc={imageSrc}>
+              <InfoSwiperTitle>{title}</InfoSwiperTitle>
+              <InfoSwiperText>{text}</InfoSwiperText>
+            </InfoSwiperContainer>
+          </SwiperSlide>
+        );
+      })}
+    </Swiper>
   );
 };
