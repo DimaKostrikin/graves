@@ -6,11 +6,14 @@ import styled from "styled-components";
 const transparentHover = "rgba(0, 0, 0, 0.3)";
 const transparentPressed = "rgba(0, 0, 0, 0.4)";
 
+const transparentHoverInvert = "rgba(255, 255, 255, 0.3)";
+const transparentPressedInvert = "rgba(255, 255, 255, 0.4)";
+
 const ButtonContainer = styled.button<{
   isHovered?: boolean;
   isPressed?: boolean;
   isDisabled?: boolean;
-  view: "normal" | "ghost";
+  view: "normal" | "ghost" | "ghostInvert";
 }>`
   position: relative;
   display: grid;
@@ -32,6 +35,11 @@ const ButtonContainer = styled.button<{
     if (props.view === "ghost") {
       if (props.isPressed) return transparentPressed;
       if (props.isHovered) return transparentHover;
+      return "transparent";
+    }
+    if (props.view === "ghostInvert") {
+      if (props.isPressed) return transparentPressedInvert;
+      if (props.isHovered) return transparentHoverInvert;
       return "transparent";
     }
   }};
@@ -56,7 +64,7 @@ export const Button = ({
   onPress,
 }: {
   text?: string;
-  view?: "ghost" | "normal";
+  view?: "ghost" | "normal" | "ghostInvert";
   size?: "small" | "normal";
   icon?: ComponentType<{ width: number; height: number; color: string }>;
   disabled?: boolean;
@@ -78,7 +86,13 @@ export const Button = ({
       view={view}
     >
       {text && <span>{text}</span>}
-      {Icon && <Icon width={24} height={24} color={palette.darkGrey} />}
+      {Icon && (
+        <Icon
+          width={24}
+          height={24}
+          color={view === "ghostInvert" ? palette.white : palette.darkGrey}
+        />
+      )}
     </ButtonContainer>
   );
 };

@@ -16,6 +16,7 @@ const DialogUnderlay = styled.div`
   display: grid;
   justify-items: center;
   align-items: center;
+  z-index: 9999;
 `;
 
 const DialogOverlay = styled.div`
@@ -24,6 +25,7 @@ const DialogOverlay = styled.div`
   padding: 24px;
   background-color: ${palette.white};
   border-radius: 16px;
+  z-index: 9999;
 `;
 
 const DialogTitleContainer = styled.div`

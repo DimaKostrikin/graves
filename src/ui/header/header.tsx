@@ -16,6 +16,7 @@ const HeaderContainer = styled.div<{ isHidden?: boolean }>`
   width: 100%;
   top: 0;
   transition: all 0.1s;
+  z-index: 9999;
 `;
 
 const HeaderTopContainer = styled.div<{ hidden?: boolean }>`

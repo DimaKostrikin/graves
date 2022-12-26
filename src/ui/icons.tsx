@@ -159,3 +159,51 @@ export const Cross = (props: SVGProps<SVGSVGElement>) => {
     </svg>
   );
 };
+
+export const ArrowLeft = (props: SVGProps<SVGSVGElement>) => {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+    >
+      <g clip-path="url(#a)">
+        <path
+          fill="currentColor"
+          d="M18.12 19.88 10.24 12l7.88-7.88L16 2 6 12l10 10 2.12-2.12Z"
+        />
+      </g>
+      <defs>
+        <clipPath id="a">
+          <path fill="#fff" d="M24 24H0V0h24z" />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+};
+
+export const ArrowRight = (props: SVGProps<SVGSVGElement>) => {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+    >
+      <g clip-path="url(#a)">
+        <path
+          fill="currentColor"
+          d="M5.88 4.12 13.76 12l-7.88 7.88L8 22l10-10L8 2 5.88 4.12Z"
+        />
+      </g>
+      <defs>
+        <clipPath id="a">
+          <path fill="#fff" d="M0 0h24v24H0z" />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+};
