@@ -80,11 +80,7 @@ const ButtonContainer = styled.div<{ position: "left" | "right" }>`
   z-index: 199;
 `;
 
-//TODO:
-//Добавить кнопки вперед/назад
-//Добавить индикатор слайда
-
-export const InfoSwiper = () => {
+export const Content = ({ className }: { className: string }) => {
   const { items } = useData();
   const [swiper, setSwiper] = useState<any>(null);
 
@@ -100,9 +96,17 @@ export const InfoSwiper = () => {
   }, [swiper]);
 
   return (
-    <div style={{ position: "relative", borderRadius: 20, overflow: "hidden" }}>
+    <div
+      className={className}
+      style={{
+        position: "relative",
+        borderRadius: 20,
+        overflow: "hidden",
+      }}
+    >
       <Swiper
-        spaceBetween={30}
+        spaceBetween={50}
+        width={null}
         loop={true}
         onSwiper={(swiper) => setSwiper(swiper)}
         pagination={{
@@ -112,6 +116,8 @@ export const InfoSwiper = () => {
           },
         }}
         modules={[Pagination]}
+        slidesPerView={"auto"}
+        className={"SwiperClassCustom"}
       >
         {items.map(({ title, text, imageSrc }) => {
           return (
@@ -141,3 +147,11 @@ export const InfoSwiper = () => {
     </div>
   );
 };
+
+export const InfoSwiper = styled(Content)`
+  .SwiperClassCustom {
+    width: calc(100vw - 32px);
+    overflow: hidden;
+    max-width: 1200px;
+  }
+`;
