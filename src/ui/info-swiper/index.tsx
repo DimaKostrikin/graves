@@ -48,7 +48,7 @@ const InfoSwiperContainer = styled.div<{ imageSrc: string }>`
   height: 400px;
   display: grid;
   grid-template-rows: min-content min-content;
-  row-gap: 0px;
+  row-gap: 16px;
   position: relative;
   overflow: hidden;
 `;
@@ -64,11 +64,10 @@ const InfoSwiperTitle = styled.span`
 const InfoSwiperText = styled.span`
   font-family: GillSansC;
   color: ${palette.white};
-  font-size: 40px;
+  font-size: 36px;
   max-width: 70%;
   z-index: 99;
   user-select: none;
-  font-weight: 100;
 `;
 
 const ButtonContainer = styled.div<{ position: "left" | "right" }>`
