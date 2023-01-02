@@ -123,7 +123,7 @@ export const Content = ({ className }: { className?: string }) => {
       >
         {items.map(({ title, text, imageSrc }) => {
           return (
-            <SwiperSlide>
+            <SwiperSlide key={imageSrc}>
               <InfoSwiperContainer imageSrc={imageSrc}>
                 <InfoSwiperTitle>{title}</InfoSwiperTitle>
                 <InfoSwiperText>{text}</InfoSwiperText>
