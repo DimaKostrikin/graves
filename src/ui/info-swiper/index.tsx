@@ -80,6 +80,8 @@ const ButtonContainer = styled.div<{ position: "left" | "right" }>`
   z-index: 199;
 `;
 
+// TODO: Сделать нормальный адаптив на мобилках
+
 export const Content = ({ className }: { className?: string }) => {
   const { items } = useData();
   const [swiper, setSwiper] = useState<any>(null);
