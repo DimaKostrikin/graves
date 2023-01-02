@@ -90,7 +90,7 @@ export const Content = ({ className }: { className?: string }) => {
       return;
     }
     const intervalId = setInterval(() => {
-      //swiper.slideNext();
+      swiper.slideNext();
     }, 10000);
 
     return () => clearInterval(intervalId);
