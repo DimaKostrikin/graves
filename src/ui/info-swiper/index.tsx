@@ -18,8 +18,8 @@ const useData = () => {
           "https://media.istockphoto.com/id/1252669949/ru/фото/рабочий-завода-человек-стоит-перед-машиной-и-действия-уверенно-на-рабочем-месте-смотреть-в.jpg?s=1024x1024&w=is&k=20&c=6x7y433nDfkILOfnHL-jVUZdY3djk8pruijLgS3BMME=",
       },
       {
-        title: "Гранит высокого качества по себестоимости",
-        text: "Наш гранит мы получаем напрямую от наших партнеров в Карелии.  Прямые поставки позволяют значительно сократить цены на памятники.",
+        title: "Гранит высокого качества",
+        text: "Сырье мы получаем напрямую от наших партнеров в Карелии. Прямые поставки позволяют значительно сократить цены на памятники.",
         imageSrc:
           "https://content.onliner.by/news/1100x5616/c0db8ed97743fd09973c2d327f5a53ad.jpeg",
       },
@@ -43,12 +43,12 @@ const InfoSwiperContainer = styled.div<{ imageSrc: string }>`
     url(${(props) => props.imageSrc});
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 32px 56px;
+  padding: 64px 64px;
   width: 100%;
-  height: 450px;
+  height: 400px;
   display: grid;
   grid-template-rows: min-content min-content;
-  row-gap: 29px;
+  row-gap: 0px;
   position: relative;
   overflow: hidden;
 `;
@@ -64,10 +64,11 @@ const InfoSwiperTitle = styled.span`
 const InfoSwiperText = styled.span`
   font-family: GillSansC;
   color: ${palette.white};
-  font-size: 44px;
+  font-size: 40px;
   max-width: 70%;
   z-index: 99;
   user-select: none;
+  font-weight: 100;
 `;
 
 const ButtonContainer = styled.div<{ position: "left" | "right" }>`
@@ -80,7 +81,7 @@ const ButtonContainer = styled.div<{ position: "left" | "right" }>`
   z-index: 199;
 `;
 
-export const Content = ({ className }: { className: string }) => {
+export const Content = ({ className }: { className?: string }) => {
   const { items } = useData();
   const [swiper, setSwiper] = useState<any>(null);
 
@@ -89,7 +90,7 @@ export const Content = ({ className }: { className: string }) => {
       return;
     }
     const intervalId = setInterval(() => {
-      swiper.slideNext();
+      //swiper.slideNext();
     }, 10000);
 
     return () => clearInterval(intervalId);
