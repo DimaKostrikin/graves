@@ -4,6 +4,9 @@ import Header from "../ui/header/header";
 import { MainContainer } from "@/ui/main-container/main-container";
 import { InfoSwiper } from "@/ui/info-swiper";
 import { GraveCard } from "@/ui/grave-card";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { useState } from "react";
 
 const PageContainer = styled.div`
   background-color: ${palette.white};
@@ -21,7 +24,7 @@ const CardGroupRow = styled.div`
   display: grid;
   margin-top: 16px;
   column-gap: 32px;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
 `;
 
 const cardGroups = [
@@ -109,23 +112,64 @@ const CardGroup = ({
     imageLink: string;
   }[];
 }) => {
+  const [slidesPerView, setSlidesPerView] = useState(5);
   return (
     <div style={{ marginTop: 40 }}>
       <CardGroupTitle>{title}</CardGroupTitle>
-      <CardGroupRow>
+      <Swiper
+        slidesPerView={slidesPerView}
+        spaceBetween={16}
+        className="CardGroupSwiperCustom"
+        onResize={(e) => {
+          if (e.width > 1000) {
+            setSlidesPerView(5);
+            return;
+          }
+          if (e.width > 777) {
+            setSlidesPerView(4);
+            return;
+          }
+          if (e.width > 612) {
+            setSlidesPerView(3);
+            return;
+          }
+          if (e.width < 612) {
+            setSlidesPerView(2);
+            return;
+          }
+          if (e.width < 777) {
+            setSlidesPerView(3);
+            return;
+          }
+          if (e.width < 1000) {
+            setSlidesPerView(4);
+            return;
+          }
+        }}
+      >
         {cards.map(({ title, price, oldPrice, imageLink }) => (
-          <GraveCard
-            key={imageLink}
-            title={title}
-            price={price}
-            oldPrice={oldPrice}
-            imageLink={imageLink}
-          />
+          <SwiperSlide key={imageLink}>
+            <GraveCard
+              title={title}
+              price={price}
+              oldPrice={oldPrice}
+              imageLink={imageLink}
+            />
+          </SwiperSlide>
         ))}
-      </CardGroupRow>
+      </Swiper>
+      <CardGroupRow></CardGroupRow>
     </div>
   );
 };
+
+const CardGroupStyled = styled(CardGroup)`
+  .CardGroupSwiperCustom {
+    width: calc(100%);
+    overflow: hidden;
+    max-width: 1200px;
+  }
+`;
 
 const Home = () => {
   return (
@@ -134,7 +178,7 @@ const Home = () => {
       <MainContainer style={{ marginBlockStart: 160 }}>
         <InfoSwiper />
         {cardGroups.map(({ title, cards }) => (
-          <CardGroup key={title} title={title} cards={cards} />
+          <CardGroupStyled key={title} title={title} cards={cards} />
         ))}
       </MainContainer>
     </PageContainer>

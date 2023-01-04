@@ -33,7 +33,10 @@ const useData = () => {
   };
 };
 
-const InfoSwiperContainer = styled.div<{ imageSrc: string }>`
+const InfoSwiperContainer = styled.div<{
+  imageSrc: string;
+  mode?: "huge" | "avg" | "small";
+}>`
   border-radius: 20px;
   background: linear-gradient(
       180deg,
@@ -43,9 +46,17 @@ const InfoSwiperContainer = styled.div<{ imageSrc: string }>`
     url(${(props) => props.imageSrc});
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 64px 64px;
+  ${(props) => {
+    if (props.mode === "huge") return "padding: 64px 64px;";
+    if (props.mode === "avg") return "padding: 32px 64px;";
+    if (props.mode === "small") return "padding: 32px 40px;";
+  }}
   width: 100%;
-  height: 400px;
+  ${(props) => {
+    if (props.mode === "huge") return "height: 400px;";
+    if (props.mode === "avg") return "height: 400px;";
+    if (props.mode === "small") return "height: 400px;";
+  }}
   display: grid;
   grid-template-rows: min-content min-content;
   row-gap: 16px;
@@ -53,19 +64,27 @@ const InfoSwiperContainer = styled.div<{ imageSrc: string }>`
   overflow: hidden;
 `;
 
-const InfoSwiperTitle = styled.span`
+const InfoSwiperTitle = styled.span<{ mode?: "huge" | "small" | "avg" }>`
   font-family: GillSansC;
   color: ${palette.white};
-  font-size: 64px;
+  ${(props) => {
+    if (props.mode === "huge") return "font-size: 64px;";
+    if (props.mode === "avg") return "font-size: 56px;";
+    if (props.mode === "small") return "font-size: 32px;";
+  }}
   z-index: 99;
   user-select: none;
 `;
 
-const InfoSwiperText = styled.span`
+const InfoSwiperText = styled.span<{ mode?: "huge" | "small" | "avg" }>`
   font-family: GillSansC;
   color: ${palette.white};
-  font-size: 36px;
-  max-width: 70%;
+  max-width: ${(props) => (props.mode === "huge" ? "70%" : "100%")};
+  ${(props) => {
+    if (props.mode === "huge") return "font-size: 36px;";
+    if (props.mode === "avg") return "font-size: 32px;";
+    if (props.mode === "small") return "font-size: 24px;";
+  }}
   z-index: 99;
   user-select: none;
 `;
@@ -85,6 +104,7 @@ const ButtonContainer = styled.div<{ position: "left" | "right" }>`
 export const Content = ({ className }: { className?: string }) => {
   const { items } = useData();
   const [swiper, setSwiper] = useState<any>(null);
+  const [mode, setMode] = useState<"huge" | "small" | "avg">("huge");
 
   useEffect(() => {
     if (!swiper) {
@@ -118,15 +138,34 @@ export const Content = ({ className }: { className?: string }) => {
           },
         }}
         modules={[Pagination]}
-        slidesPerView={"auto"}
+        slidesPerView={1}
         className={"SwiperClassCustom"}
+        updateOnWindowResize
+        onResize={(e) => {
+          if (e.width >= 900) {
+            setMode("huge");
+            return;
+          }
+          if (e.width >= 700) {
+            setMode("avg");
+            return;
+          }
+          if (e.width < 700) {
+            setMode("small");
+            return;
+          }
+          if (e.width < 900) {
+            setMode("avg");
+            return;
+          }
+        }}
       >
         {items.map(({ title, text, imageSrc }) => {
           return (
             <SwiperSlide key={imageSrc}>
-              <InfoSwiperContainer imageSrc={imageSrc}>
-                <InfoSwiperTitle>{title}</InfoSwiperTitle>
-                <InfoSwiperText>{text}</InfoSwiperText>
+              <InfoSwiperContainer mode={mode} imageSrc={imageSrc}>
+                <InfoSwiperTitle mode={mode}>{title}</InfoSwiperTitle>
+                <InfoSwiperText mode={mode}>{text}</InfoSwiperText>
               </InfoSwiperContainer>
             </SwiperSlide>
           );
@@ -152,7 +191,7 @@ export const Content = ({ className }: { className?: string }) => {
 
 export const InfoSwiper = styled(Content)`
   .SwiperClassCustom {
-    width: calc(100vw - 32px);
+    width: 100%;
     overflow: hidden;
     max-width: 1200px;
   }

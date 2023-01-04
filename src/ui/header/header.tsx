@@ -55,7 +55,6 @@ const Header = () => {
       if (window.scrollY >= scrollTop) {
         setScroll("down");
       } else {
-        console.log("setUp");
         setScroll("up");
       }
       scrollTop = window.scrollY;
