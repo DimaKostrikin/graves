@@ -115,6 +115,7 @@ const CardGroup = ({
       <CardGroupRow>
         {cards.map(({ title, price, oldPrice, imageLink }) => (
           <GraveCard
+            key={imageLink}
             title={title}
             price={price}
             oldPrice={oldPrice}
@@ -133,7 +134,7 @@ const Home = () => {
       <MainContainer style={{ marginBlockStart: 160 }}>
         <InfoSwiper />
         {cardGroups.map(({ title, cards }) => (
-          <CardGroup title={title} cards={cards} />
+          <CardGroup key={title} title={title} cards={cards} />
         ))}
       </MainContainer>
     </PageContainer>
