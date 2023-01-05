@@ -13,7 +13,7 @@ const ButtonContainer = styled.button<{
   isHovered?: boolean;
   isPressed?: boolean;
   isDisabled?: boolean;
-  view: "normal" | "ghost" | "ghostInvert";
+  view: "normal" | "ghost" | "ghostInvert" | "white";
 }>`
   position: relative;
   display: grid;
@@ -42,7 +42,14 @@ const ButtonContainer = styled.button<{
       if (props.isHovered) return transparentHoverInvert;
       return "transparent";
     }
+    if (props.view === "white") {
+      return palette.white;
+    }
   }};
+  ${(props) =>
+    props.view === "white"
+      ? "box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);"
+      : ""}
   justify-items: center;
   align-items: center;
   border-radius: 16px;
@@ -64,7 +71,7 @@ export const Button = ({
   onPress,
 }: {
   text?: string;
-  view?: "ghost" | "normal" | "ghostInvert";
+  view?: "ghost" | "normal" | "ghostInvert" | "white";
   size?: "small" | "normal";
   icon?: ComponentType<{ width: number; height: number; color: string }>;
   disabled?: boolean;

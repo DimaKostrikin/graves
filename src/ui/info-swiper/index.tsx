@@ -99,7 +99,7 @@ const ButtonContainer = styled.div<{ position: "left" | "right" }>`
   z-index: 199;
 `;
 
-// TODO: Сделать нормальный адаптив на мобилках
+// TODO: разобраться с тайпингами в стейте свайпера, убрать any
 
 export const Content = ({ className }: { className?: string }) => {
   const { items } = useData();
@@ -110,6 +110,7 @@ export const Content = ({ className }: { className?: string }) => {
     if (!swiper) {
       return;
     }
+
     const intervalId = setInterval(() => {
       swiper.slideNext();
     }, 10000);
@@ -130,7 +131,26 @@ export const Content = ({ className }: { className?: string }) => {
         spaceBetween={50}
         width={null}
         loop={true}
-        onSwiper={(swiper) => setSwiper(swiper)}
+        onSwiper={(swiper) => {
+          setSwiper(swiper);
+
+          if (swiper.width >= 900) {
+            setMode("huge");
+            return;
+          }
+          if (swiper.width >= 700) {
+            setMode("avg");
+            return;
+          }
+          if (swiper.width < 700) {
+            setMode("small");
+            return;
+          }
+          if (swiper.width < 900) {
+            setMode("avg");
+            return;
+          }
+        }}
         pagination={{
           clickable: true,
           renderBullet(index, className) {
@@ -140,7 +160,8 @@ export const Content = ({ className }: { className?: string }) => {
         modules={[Pagination]}
         slidesPerView={1}
         className={"SwiperClassCustom"}
-        updateOnWindowResize
+        observer
+        observeParents
         onResize={(e) => {
           if (e.width >= 900) {
             setMode("huge");
