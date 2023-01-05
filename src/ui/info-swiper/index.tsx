@@ -100,6 +100,7 @@ const ButtonContainer = styled.div<{ position: "left" | "right" }>`
 `;
 
 // TODO: разобраться с тайпингами в стейте свайпера, убрать any
+// Добавить еще один брейкпоинт на ~400 пикселей.
 
 export const Content = ({ className }: { className?: string }) => {
   const { items } = useData();
