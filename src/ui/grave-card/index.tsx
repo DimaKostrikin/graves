@@ -1,4 +1,5 @@
 import { palette } from "@/palette";
+import Link from "next/link";
 import { useState } from "react";
 import styled from "styled-components";
 
@@ -52,12 +53,14 @@ export const GraveCard = ({
   const [intl] = useState(new Intl.NumberFormat("ru-RU"));
 
   return (
-    <GraveCardContainer>
-      <ImageContainer>
-        <ImageStyled src={imageLink} />
-      </ImageContainer>
-      <CardTitle>{title}</CardTitle>
-      <Price>{`${intl.format(price)} ₽`}</Price>
-    </GraveCardContainer>
+    <Link href={"/product"}>
+      <GraveCardContainer>
+        <ImageContainer>
+          <ImageStyled src={imageLink} />
+        </ImageContainer>
+        <CardTitle>{title}</CardTitle>
+        <Price>{`${intl.format(price)} ₽`}</Price>
+      </GraveCardContainer>
+    </Link>
   );
 };
